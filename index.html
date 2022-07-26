@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/scandit-sdk@5.x"></script>
+  </head>
+  <body>
+    <scandit-barcode-picker
+      id="barcodePicker"
+      configure.licenseKey="Ab8BrRVTNxrRIQFduw5gKYsZmx8ZHIlex2AXTpxOGrGvNJwy8hVpUIV651t6LQpghnEoRYlDQhGJSIgmmwviF+B+GDakdrNaimLDJJd7fXfIFAhXxiBGg+cWx0EOJD5+qUa4FnfCC/LCP24niIf11xhi98chMGk4L2DnGVtz8pL8XZS/ksPgW50udOnHj0gIeLxuBtf5auCjnYhujL1FEfDir4djlsstoZxf3M6+JpsnP2FGeMM2V9ydlksRBJvFnARpVtayg+MdFOcXgWwG81gKffndRFJmixvTwfFpMj22Pxl+pOWdHs/KANkZ7Rws5SAmJ/IAzGkihzORd1EedzdQxItW7ZjxsLJ9TjRxGwnz8JCkeZA9lq9Zzc5RI3hRNbvmJrYv5KHLB2hathaaceHtbgUZf28NEqd0WTUnL9KcecWzgJYoNF8WLaXh6zV6SwA4wNjsioV9J8j0zzfloYNoiHKBRvHt2CBY5OnRLy8iFAk4CaG3peh5VfAk9AVKh03j6CuuhGRGq3dPyiMI+J3bKbU2F75/0OEAYh1Xi16BNGpvtgOV6Aeb1aWkMiKfM/6+teHCRZbSWjQJZCGBNmI0wcG3NrEULYCRda54sJ+HP+VV8NivCa8elFcKWpg4NKozwIr9rugKXjfrq1StegL9wfjeqo23QD8PdcF4plb21xJ3P2vWuvS1WBu8eNzyZ4flM29HYzHxmigdQXszZLjNQX8FjounEUI48xMiU1ESNoLjw0GCo2pgXQPRYQ5nYCvLlr2HM7ev2o6eVxCHvdIzM1R8LLcNH4eUzyRpDw=="
+      configure.engineLocation="https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build/"
+      playSoundOnScan="true"
+      scanSettings.enabledSymbologies='["ean8", "ean13", "upca", "upce", "qr"]'
+    ></scandit-barcode-picker>
+  </body>
+  <script>
+    const barcodePickerElement = document.getElementById("barcodePicker");
+    barcodePickerElement.addEventListener("scan", function (event) {
+      const scanResult = event.detail;
+      alert(
+        scanResult.barcodes.reduce(function (string, barcode) {
+          return (
+            string +
+            ScanditSDK.Barcode.Symbology.toHumanizedName(barcode.symbology) +
+            ": " +
+            barcode.data +
+            "\n"
+          );
+        }, "")
+      );
+    });
+  </script>
+</html>
